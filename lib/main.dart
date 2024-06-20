@@ -1,8 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/src/scheduler/binding.dart';
 import 'package:quiz_app/QuestionBank.dart';
 import 'package:quiz_app/Questions.dart';
+
+
 
 void main() => runApp(Quizzler());
 
@@ -66,10 +69,48 @@ class _QuizPageState extends State<QuizPage> {
 
   }
 
+  // void alert(BuildContext context){
+  //
+  //   Alert(
+  //     context: context,
+  //     title: "Yooo",
+  //     desc: "The quiz is over ",
+  //     buttons: [DialogButton(
+  //       onPressed: () {
+  //           Navigator.pop(context);
+  //         },
+  //       width: 120.0,
+  //       child: const Text(
+  //         "Okay",
+  //         style: TextStyle(
+  //             color: Colors.white
+  //         ),
+  //       ),
+  //     )],
+  //   ).show();
+  // }
 
   List<Widget> display(){
 
     if( qb.isFinished() ){
+
+      // Alert(
+      //   context: context,
+      //   title: "Yooo",
+      //   desc: "The quiz is over ",
+      //   buttons: [DialogButton(
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //     width: 120.0,
+      //     child: const Text(
+      //       "Okay",
+      //       style: TextStyle(
+      //           color: Colors.white
+      //       ),
+      //     ),
+      //   )],
+      // ).show();
 
       return [
         const Expanded(
@@ -196,6 +237,7 @@ class _QuizPageState extends State<QuizPage> {
 
 
   }
+
 
 
   @override
