@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:quiz_app/Questions.dart';
 
 void main() => runApp(Quizzler());
 
@@ -26,34 +27,36 @@ class Quizzler extends StatelessWidget {
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
 
+
+
   @override
   _QuizPageState createState() => _QuizPageState();
 }
 
 class _QuizPageState extends State<QuizPage> {
 
+  List<Questions> questions = [
+     Questions('You can lead a cow down stairs but not up stairs.', false),
+    Questions('Approximately one quarter of human bones are in the feet.', true),
+    Questions('A slug\'s blood is green.', true)
+  ];
+
   List<Icon> scoreKeeper = [];
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
-  ];
-  List<bool> answers = [
-    false, true, true
-  ];
+
+
 
   int questionNumber = 0;
 
 
   void checkAnswers( bool answer ){
 
-    if( answer == answers[questionNumber] ){
+    if( answer == questions[questionNumber].answer ){
 
       setState(() {
-        scoreKeeper.add(const Icon(
+        scoreKeeper.add( const Icon(
           Icons.check,
           color: Colors.green,
-        ),);
+        ) );
         ++questionNumber;
       });
 
@@ -63,7 +66,7 @@ class _QuizPageState extends State<QuizPage> {
         scoreKeeper.add(const Icon(
           Icons.close,
           color: Colors.red,
-        ),);
+        ));
         ++questionNumber;
       });
     }
@@ -83,7 +86,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber],
+                questions[questionNumber].question,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,
