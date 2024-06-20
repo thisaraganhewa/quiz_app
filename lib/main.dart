@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:quiz_app/QuestionBank.dart';
 import 'package:quiz_app/Questions.dart';
 
 void main() => runApp(Quizzler());
@@ -35,11 +36,7 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
 
-  List<Questions> questions = [
-     Questions('You can lead a cow down stairs but not up stairs.', false),
-    Questions('Approximately one quarter of human bones are in the feet.', true),
-    Questions('A slug\'s blood is green.', true)
-  ];
+  QuestionBank qb = new QuestionBank();
 
   List<Icon> scoreKeeper = [];
 
@@ -50,7 +47,7 @@ class _QuizPageState extends State<QuizPage> {
 
   void checkAnswers( bool answer ){
 
-    if( answer == questions[questionNumber].answer ){
+    if( answer == qb.getQuestion(questionNumber).answer ){
 
       setState(() {
         scoreKeeper.add( const Icon(
@@ -86,7 +83,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber].question,
+                qb.getQuestion(questionNumber).question,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,
