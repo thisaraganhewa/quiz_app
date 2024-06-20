@@ -36,25 +36,21 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
 
-  QuestionBank qb = new QuestionBank();
-
+  QuestionBank qb = QuestionBank();
   List<Icon> scoreKeeper = [];
-
-
-
   int questionNumber = 0;
 
 
   void checkAnswers( bool answer ){
 
-    if( answer == qb.getQuestion(questionNumber).answer ){
+    if( answer == qb.getAnswer() ){
 
       setState(() {
         scoreKeeper.add( const Icon(
           Icons.check,
           color: Colors.green,
         ) );
-        ++questionNumber;
+        qb.nextQuestion();
       });
 
     }
@@ -64,7 +60,7 @@ class _QuizPageState extends State<QuizPage> {
           Icons.close,
           color: Colors.red,
         ));
-        ++questionNumber;
+        qb.nextQuestion();
       });
     }
 
@@ -83,7 +79,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                qb.getQuestion(questionNumber).question,
+                qb.getQuestion(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,

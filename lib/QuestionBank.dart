@@ -2,6 +2,8 @@ import 'Questions.dart';
 
 class QuestionBank{
 
+  int _questionNumber = 0;
+
   final List<Questions> _questions = [
     Questions('You can lead a cow down stairs but not up stairs.', false),
     Questions('Approximately one quarter of human bones are in the feet.', true),
@@ -29,9 +31,23 @@ class QuestionBank{
         true),
   ];
 
-  Questions getQuestion( int questionNumber ){
+  String getQuestion( ){
 
-    return _questions[questionNumber];
+    return _questions[_questionNumber].question;
+
+  }
+
+  bool getAnswer(){
+
+    return _questions[_questionNumber].answer;
+
+  }
+
+  void nextQuestion(){
+
+    if( _questionNumber < _questions.length ){
+      ++_questionNumber;
+    }
 
   }
 
