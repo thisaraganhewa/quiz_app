@@ -67,12 +67,64 @@ class _QuizPageState extends State<QuizPage> {
   }
 
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
+  List<Widget> display(){
+
+    if( qb.isFinished() ){
+
+      return [
+        const Expanded(
+        flex: 5,
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Center(
+            child: Text(
+              "You Completed the quize",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 25.0,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+        Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: TextButton(
+
+            style: const ButtonStyle(
+              backgroundColor: WidgetStatePropertyAll<Color>(Colors.lightBlueAccent),
+              textStyle: WidgetStatePropertyAll<TextStyle>(
+                  TextStyle(
+                      color: Colors.white
+                  )
+              ),
+            ),
+            child: const Text(
+              'Restart',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+              ),
+            ),
+            onPressed: () {
+              setState(() {
+                qb.restart();
+                scoreKeeper = [];
+              });
+            },
+          ),
+        ),
+      ),
+        Row(
+          children: scoreKeeper,
+        ),
+      ];
+
+    }
+    else{
+      return[
         Expanded(
           flex: 5,
           child: Padding(
@@ -120,7 +172,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
               style: const ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll<Color>(Colors.red)
+                  backgroundColor: WidgetStatePropertyAll<Color>(Colors.red)
               ),
               child: const Text(
                 'False',
@@ -138,7 +190,20 @@ class _QuizPageState extends State<QuizPage> {
         Row(
           children: scoreKeeper,
         ),
-      ],
+      ];
+    }
+
+
+
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: display(),
     );
   }
 }

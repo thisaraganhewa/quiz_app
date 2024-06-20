@@ -3,6 +3,7 @@ import 'Questions.dart';
 class QuestionBank{
 
   int _questionNumber = 0;
+  bool _finished = false;
 
   final List<Questions> _questions = [
     Questions('You can lead a cow down stairs but not up stairs.', false),
@@ -45,9 +46,25 @@ class QuestionBank{
 
   void nextQuestion(){
 
-    if( _questionNumber < _questions.length ){
+    if( _questionNumber < (_questions.length - 1) ){
       ++_questionNumber;
     }
+    else{
+      _finished = true;
+    }
+
+  }
+
+  bool isFinished(){
+
+    return _finished;
+
+  }
+
+  void restart(){
+
+    _questionNumber = 0;
+    _finished = false;
 
   }
 
